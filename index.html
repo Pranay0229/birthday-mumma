@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday Mumma 🌸 | Specially For You 💕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="A premium birthday surprise website crafted with love just for Mumma 💖" />
+  
+  <!-- Google Fonts: English Serif, Sans, Cursive + Noto Sans Devanagari for Marathi -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-red-yellow">
+
+  <!-- Ambient Animated Background Orbs -->
+  <div class="dreamy-bg">
+    <div class="bg-orb orb1"></div>
+    <div class="bg-orb orb2"></div>
+    <div class="bg-orb orb3"></div>
+    <div class="bg-orb orb4"></div>
+  </div>
+
+  <!-- Ambient Particle Canvas -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Heart Progress Bar -->
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-hearts" id="progressHearts"></div>
+  </div>
+
+  <!-- PAGE 1: Welcome -->
+  <section class="page active" id="page1">
+    <div class="floating-elements">
+      <span>💕</span>
+      <span>✨</span>
+      <span>💖</span>
+      <span>🌸</span>
+      <span>🎀</span>
+      <span>⭐</span>
+    </div>
+    <div class="card dreamy-card glass-card">
+      <div class="cake-icon-wrap" id="welcomeCakeIcon">🎂</div>
+      <h1><span class="gradient-text">Hey Beautiful Mumma</span> 🌸</h1>
+      <p class="soft-text">I've crafted something special just for you.</p>
+      <p class="soft-text sub-hint">Are you ready to see it?</p>
+      <button id="readyBtn" onclick="goToPage(2)">Yes, I'm Ready 💖</button>
+    </div>
+  </section>
+
+  <!-- PAGE 2: Passcode Lock (ATM-style) -->
+  <section class="page" id="page2">
+    <div class="card passcode-card glass-card">
+      <div class="lock-icon-wrap" style="font-size: 50px;">🔒</div>
+      <h2>Enter Secret Code</h2>
+      <p class="soft-text hint-text">Only Mumma knows this secret code! 🎂</p>
+      
+      <!-- Passcode Display dots -->
+      <div class="passcode-display" id="passcodeDisplay">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <!-- ATM Keypad Grid -->
+      <div class="atm-grid">
+        <button class="num-btn" onclick="pressKey('1')">1</button>
+        <button class="num-btn" onclick="pressKey('2')">2</button>
+        <button class="num-btn" onclick="pressKey('3')">3</button>
+        <button class="num-btn" onclick="pressKey('4')">4</button>
+        <button class="num-btn" onclick="pressKey('5')">5</button>
+        <button class="num-btn" onclick="pressKey('6')">6</button>
+        <button class="num-btn" onclick="pressKey('7')">7</button>
+        <button class="num-btn" onclick="pressKey('8')">8</button>
+        <button class="num-btn" onclick="pressKey('9')">9</button>
+        <button class="ctrl-btn clear-btn" onclick="clearKeys()">Clear</button>
+        <button class="num-btn" onclick="pressKey('0')">0</button>
+        <button class="ctrl-btn back-btn" onclick="backspaceKey()">⌫</button>
+      </div>
+
+      <button id="hintBtn" class="hint-toggle-btn" onclick="toggleHint()">Need a hint? 💡</button>
+      <p id="hintText" class="hidden-hint soft-text">Hint: Our special passcode (0229) 📅</p>
+    </div>
+  </section>
+
+  <!-- PAGE 3: Happy Birthday Wish -->
+  <section class="page" id="page3">
+    <div class="wishes-opening-wrapper">
+      <div class="celebration-title-wrap">
+        <h1 class="hbd-shimmer">Happy Birthday</h1>
+        <h2 class="shavuu-cursive">Mumma 🌸</h2>
+      </div>
+      <button id="continueBtn" onclick="handleCelebrationContinue()" style="animation: glowPulse 2s infinite;">Continue 💝</button>
+    </div>
+    <div class="letter-decor" id="letterDecorContainer"></div>
+    <div class="sparkles" id="sparkleDecorContainer"></div>
+  </section>
+
+  <!-- PAGE 4: Choice (Make a Wish vs Cut Cake) -->
+  <section class="page" id="page4">
+    <div class="choice-wrapper">
+      <h2 class="section-title">🎂 What should we do first, Mumma?</h2>
+      <p class="sub-text">Tap on your choice to play! 💕</p>
+      <div class="choices">
+        <div class="choice-card glass-card" id="wishChoice" onclick="chooseAction('wish')">
+          <div class="icon">✨</div>
+          <p>Make a Wish</p>
+          <div class="choice-glow"></div>
+          <span class="badge hidden" id="wishBadge">Done ✓</span>
+        </div>
+        <div class="choice-card glass-card" id="cakeChoice" onclick="chooseAction('cake')">
+          <div class="icon">🎂</div>
+          <p>Cut the Cake</p>
+          <div class="choice-glow"></div>
+          <span class="badge hidden" id="cakeBadge">Done ✓</span>
+        </div>
+      </div>
+      <button id="choiceContinueBtn" class="hidden continue-choice-btn" onclick="goToMemories()">Continue to Memories 📸</button>
+    </div>
+  </section>
+
+  <!-- PAGE 5: Cake Cutting -->
+  <section class="page" id="page5">
+    <div class="cake-wrapper">
+      <h2 class="section-title">🎂 Cut the Cake for Mumma!</h2>
+      <p class="sub-text">Mobile: Tap the cake. Laptop: Move cursor across it to slice 🍰</p>
+      
+      <!-- Interactive Cake Display -->
+      <div id="cakeContainer" onmouseenter="startDesktopSlash(event)" onmousemove="trackDesktopSlash(event)" onmouseleave="endDesktopSlash()" onclick="triggerCakeCut()">
+        <div class="cake-glow-ring"></div>
+        
+        <!-- Illustrated Cake -->
+        <div class="css-cake" id="interactiveCake">
+          <div class="cake-topper">🍒🍓🍒</div>
+          <div class="cake-candles">
+            <div class="cake-candle"><span class="candle-flame"></span></div>
+          </div>
+          <div class="cake-halves">
+            <div class="cake-half left-half">
+              <div class="cake-slice-cream"></div>
+            </div>
+            <div class="cake-half right-half">
+              <div class="cake-slice-cream"></div>
+            </div>
+          </div>
+          <div class="cake-stand"></div>
+        </div>
+
+        <div class="knife-hint">🔪</div>
+      </div>
+
+      <p id="cakeMessage" class="hidden reveal-text"></p>
+      <button id="cakeContinue" class="hidden" onclick="handleCakeContinue()">Continue →</button>
+    </div>
+    <div class="cake-emojis" id="cakeEmojisContainer"></div>
+  </section>
+
+  <!-- PAGE 6: Make a Wish -->
+  <section class="page" id="page6">
+    <div class="wish-wrapper">
+      <h2 class="section-title">✨ Make a Wish, Mumma</h2>
+      <p class="sub-text">Close your eyes, make a wish, and blow out the candles 🕯️</p>
+      
+      <div id="candles">
+        <div class="candle-wrap" onclick="tapBlowCandle(0)">
+          <div class="flame"></div>
+          <span class="candle-body">🕯️</span>
+        </div>
+        <div class="candle-wrap" onclick="tapBlowCandle(1)">
+          <div class="flame"></div>
+          <span class="candle-body">🕯️</span>
+        </div>
+        <div class="candle-wrap" onclick="tapBlowCandle(2)">
+          <div class="flame"></div>
+          <span class="candle-body">🕯️</span>
+        </div>
+        <div class="candle-wrap" onclick="tapBlowCandle(3)">
+          <div class="flame"></div>
+          <span class="candle-body">🕯️</span>
+        </div>
+        <div class="candle-wrap" onclick="tapBlowCandle(4)">
+          <div class="flame"></div>
+          <span class="candle-body">🕯️</span>
+        </div>
+      </div>
+      
+      <p id="wishMessage">Tap the Blow button or tap individual candles! 🎂</p>
+      <div class="wish-controls">
+        <button id="blowButton" onclick="blowAllCandles()">💨 Blow All</button>
+      </div>
+      <button id="wishContinue" class="hidden" onclick="handleWishContinue()">Continue →</button>
+    </div>
+    <div class="wish-emojis" id="wishEmojisContainer"></div>
+  </section>
+
+  <!-- PAGE 7: Memory Scrapbook -->
+  <section class="page" id="page7">
+    <div class="wishes-wrapper scrapbook-wrapper">
+      <h2 class="section-title">📸 Scrapbook of Mumma</h2>
+      <p class="sub-text">Drag, click navigation buttons, or tap side cards to spin! 💖</p>
+      
+      <!-- 3D Carousel Viewport -->
+      <div class="carousel-viewport" id="carouselViewport">
+        <!-- Navigation Buttons -->
+        <button class="carousel-nav-btn prev-btn" id="carouselPrevBtn" onclick="rotateCarouselLeft()">&#10094;</button>
+        
+        <div class="carousel-container" id="carouselContainer">
+          <div class="carousel" id="carouselTrack">
+            <!-- Card 1 -->
+            <div class="carousel-card" id="memCard1" onclick="handleCardInteraction(0)">
+              <div class="washi-tape pink-tape"></div>
+              <div class="polaroid-frame">
+                <div class="polaroid-image">
+                  <img src="assets/pic5.jpeg" onerror="this.src='assets/pic1.jpeg'" alt="Memory 1" />
+                </div>
+                <div class="polaroid-caption">Your beautiful smile, Mumma! 😊💖✨</div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="carousel-card" id="memCard2" onclick="handleCardInteraction(1)">
+              <div class="washi-tape blue-tape"></div>
+              <div class="polaroid-frame">
+                <div class="polaroid-image">
+                  <img src="assets/pic6.jpeg" onerror="this.src='assets/pic2.jpeg'" alt="Memory 2" />
+                </div>
+                <div class="polaroid-caption">Lighting up every room! ✨🌸💫</div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="carousel-card" id="memCard3" onclick="handleCardInteraction(2)">
+              <div class="washi-tape yellow-tape"></div>
+              <div class="polaroid-frame">
+                <div class="polaroid-image">
+                  <img src="assets/pic7.jpeg" onerror="this.src='assets/pic3.jpeg'" alt="Memory 3" />
+                </div>
+                <div class="polaroid-caption">Absolutely gorgeous Mumma! 🌟💖🎀</div>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="carousel-card" id="memCard4" onclick="handleCardInteraction(3)">
+              <div class="washi-tape purple-tape"></div>
+              <div class="polaroid-frame">
+                <div class="polaroid-image">
+                  <img src="assets/pic8.jpeg" onerror="this.src='assets/pic1.jpeg'" alt="Memory 4" />
+                </div>
+                <div class="polaroid-caption">May your dreams come true! 💫🧿🌈</div>
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="carousel-card" id="memCard5" onclick="handleCardInteraction(4)">
+              <div class="washi-tape pink-tape"></div>
+              <div class="polaroid-frame">
+                <div class="polaroid-image">
+                  <img src="assets/pic9.jpeg" onerror="this.src='assets/pic2.jpeg'" alt="Memory 5" />
+                </div>
+                <div class="polaroid-caption">Simply perfect moments! 💝🌹🧸</div>
+              </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="carousel-card" id="memCard6" onclick="handleCardInteraction(5)">
+              <div class="washi-tape blue-tape"></div>
+              <div class="polaroid-frame">
+                <div class="polaroid-image">
+                  <img src="assets/pic10.jpeg" onerror="this.src='assets/pic3.jpeg'" alt="Memory 6" />
+                </div>
+                <div class="polaroid-caption">Sweetest &amp; kindest soul! 🧸💕🌸</div>
+              </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="carousel-card" id="memCard7" onclick="handleCardInteraction(6)">
+              <div class="washi-tape yellow-tape"></div>
+              <div class="polaroid-frame">
+                <div class="polaroid-image">
+                  <img src="assets/pic11.jpeg" onerror="this.src='assets/pic1.jpeg'" alt="Memory 7" />
+                </div>
+                <div class="polaroid-caption">Cherishing every second! 🦋✨💕</div>
+              </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="carousel-card" id="memCard8" onclick="handleCardInteraction(7)">
+              <div class="washi-tape purple-tape"></div>
+              <div class="polaroid-frame">
+                <div class="polaroid-image">
+                  <img src="assets/pic12.jpeg" onerror="this.src='assets/pic2.jpeg'" alt="Memory 8" />
+                </div>
+                <div class="polaroid-caption">Shining bright like a star! 🌟🎈🧿</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-nav-btn next-btn" id="carouselNextBtn" onclick="rotateCarouselRight()">&#10148;</button>
+      </div>
+      
+      <button id="scrapbookContinueBtn" class="hidden scrapbook-continue-btn" onclick="goToPage(8)">Choose Song Selection 🎵</button>
+    </div>
+    <div class="wish-float-emojis" id="scrapbookEmojisContainer"></div>
+  </section>
+
+  <!-- PAGE 8: Song Selection -->
+  <section class="page" id="page8">
+    <div class="song-wrapper">
+      <h2 class="section-title">🎵 Choose Your Birthday Vibe!</h2>
+      <p class="sub-text">Pick a song to play for Mumma 💖</p>
+      
+      <div class="song-grid">
+        <!-- Song 1 -->
+        <div class="song-card glass-card" data-song="assets/song1.mp3" id="songCard1" onclick="selectSong(this, 'assets/song1.mp3', 1)">
+          <div class="song-img-container">
+            <img src="assets/pic1.jpeg" alt="Aaj se teri" />
+            <div class="song-overlay"><span class="play-icon">▶</span></div>
+          </div>
+          <div class="song-info">
+            <p class="song-title">Aaj Se Teri 🌸</p>
+            <div class="equalizer" id="eq1">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Song 2 -->
+        <div class="song-card glass-card" data-song="assets/song2.mp3" id="songCard2" onclick="selectSong(this, 'assets/song2.mp3', 2)">
+          <div class="song-img-container">
+            <img src="assets/pic2.jpeg" alt="Khat" />
+            <div class="song-overlay"><span class="play-icon">▶</span></div>
+          </div>
+          <div class="song-info">
+            <p class="song-title">Khat 💌</p>
+            <div class="equalizer" id="eq2">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Song 3 -->
+        <div class="song-card glass-card" data-song="assets/song3.mp3" id="songCard3" onclick="selectSong(this, 'assets/song3.mp3', 3)">
+          <div class="song-img-container">
+            <img src="assets/pic3.jpeg" alt="Chori Kiya re Jiya" />
+            <div class="song-overlay"><span class="play-icon">▶</span></div>
+          </div>
+          <div class="song-info">
+            <p class="song-title">Chori Kiya Re Jiya 🫶🏻✨</p>
+            <div class="equalizer" id="eq3">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Song 4 -->
+        <div class="song-card glass-card" data-song="assets/song4.mp3" id="songCard4" onclick="selectSong(this, 'assets/song4.mp3', 4)">
+          <div class="song-img-container">
+            <img src="assets/pic4.jpeg" alt="Tik Tik vajte" />
+            <div class="song-overlay"><span class="play-icon">▶</span></div>
+          </div>
+          <div class="song-info">
+            <p class="song-title">Tik Tik Vajte 🤍✨</p>
+            <div class="equalizer" id="eq4">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <button id="songContinue" class="hidden song-continue-btn" onclick="goToPage(9)">Open Your Special Gift 🎁</button>
+    </div>
+    <div class="song-emojis" id="songEmojisContainer"></div>
+  </section>
+
+  <!-- PAGE 9: Birthday Surprise Gift Box -->
+  <section class="page" id="page9">
+    <div class="gift-page-wrapper">
+      <h2 class="section-title">🎁 A Special Gift for Mumma!</h2>
+      <p class="sub-text">Tap the gift box to unwrap your birthday surprise 💕</p>
+
+      <!-- Interactive 3D Gift Box -->
+      <div class="gift-box-stage" id="giftBoxStage" onclick="unwrapGiftBox()">
+        <div class="gift-glow-halo"></div>
+        <div class="gift-box" id="giftBox">
+          <div class="gift-lid" id="giftLid">
+            <div class="gift-ribbon-vertical"></div>
+            <div class="gift-bow">🎀</div>
+          </div>
+          <div class="gift-base">
+            <div class="gift-ribbon-vertical"></div>
+            <div class="gift-ribbon-horizontal"></div>
+          </div>
+        </div>
+        <p class="gift-tap-hint" id="giftTapHint">✨ Tap to unwrap ✨</p>
+      </div>
+
+      <!-- Revealed Gift Content (Award Certificate & Special Badges) -->
+      <div class="gift-reveal-card glass-card hidden" id="giftRevealCard">
+        <div class="award-badge-icon">👑</div>
+        <h3 class="award-title">My Favorite Mumma Award 🏆💖</h3>
+        <p class="award-subtitle">या जगातील माझ्या सर्वात आवडत्या, सर्वात खास आणि गोड व्यक्तीसाठी! 🌸✨</p>
+
+        <div class="award-traits-grid">
+          <div class="trait-chip" onclick="celebrateTrait('💖')">
+            <span class="trait-emoji">💖</span>
+            <span class="trait-text">Pure Unconditional Love</span>
+          </div>
+          <div class="trait-chip" onclick="celebrateTrait('😂')">
+            <span class="trait-emoji">🤭</span>
+            <span class="trait-text">Crazy Fun &amp; Laughs</span>
+          </div>
+          <div class="trait-chip" onclick="celebrateTrait('🫶🏻')">
+            <span class="trait-emoji">🫶🏻</span>
+            <span class="trait-text">Always By My Side</span>
+          </div>
+          <div class="trait-chip" onclick="celebrateTrait('🧿')">
+            <span class="trait-emoji">🧿</span>
+            <span class="trait-text">My gondduuddii</span>
+          </div>
+        </div>
+
+        <p class="gift-final-note">You are one in a billion, Mumma. And now, the most special thing for you... 💌</p>
+        <button id="giftContinueBtn" class="gift-continue-btn" onclick="goToPage(10)">Open Your Birthday Letter 💌</button>
+      </div>
+    </div>
+    <div class="gift-emojis" id="giftEmojisContainer"></div>
+  </section>
+
+  <!-- PAGE 10: Final Letter (Envelope to Letter) -->
+  <section class="page" id="page10">
+    <div class="final-letter-wrapper">
+      <div class="love-letter-envelope" id="envelopeWrap">
+        <div class="envelope-container">
+          <div class="envelope-back"></div>
+          <div class="envelope-paper" id="envelopePaper">
+            <p class="paper-preview">Hey Mumma... 💖</p>
+          </div>
+          <div class="envelope-left"></div>
+          <div class="envelope-right"></div>
+          <div class="envelope-flap-css" id="envelopeFlap"></div>
+          <div class="envelope-heart-seal" id="heartSeal" onclick="openEnvelope()">💖</div>
+        </div>
+        <button id="openLetterBtn" onclick="openEnvelope()">Open Letter 💖</button>
+      </div>
+
+      <div class="final-message-wrap hidden" id="finalMsgWrap">
+        <div class="final-scroll glass-card">
+          <div id="finalMessage" class="marathi-letter">
+            <h3 class="letter-main-title">Happy Birthday My Mummmaaaaa ♥️</h3>
+            
+            <p>आजचा दिवस हा तुझ्यासाठी खास आहे माहिते 😁 पण तुझ्या पेक्षा या दिवसाची वाट मी बघत होतो 🤭</p>
+            
+            <p>आजचा दिवस स्पेशल करण्यासाठी मी एवढा काही खास तर नाही केला कारण काय करू एवढा समजल नाही मला पण जे पण केले ते तुला उद्या सकाळी बघायला भेटेल 😅</p>
+            
+            <p>आणि तू माझ्यासाठी खूप म्हणजे खूप खास आहे हे मला तुला वेगळ सांगायची गरज नाही पण तरी पण मी आज सांगतोच :</p>
+            
+            <p>मम्मा तू माझ्या लाइफ मधे तेव्हा एंट्री घेतलीस जेव्हा मी खूप एकटा पडलेलो आणि तेव्हा पासून आज पर्यंत तू मी एकटा आहे याची कधी जाणीव नाही करून दिलीस ♥️</p>
+            
+            <p>तुझ्या सोबत घालवलेले प्रत्येक क्षण माझ्या डोक्यात आहे, मनात आहे, हृदयात आहे आणि माझ्या दुसऱ्या फ़ोन मधे पण आहे 😂🤭</p>
+            
+            <p>आपली लव स्टोरी ही आपण कमी आणि <strong class="highlight-name">tanmanie</strong> आणि <strong class="highlight-name">lallii</strong> ने जास्त पाहिली...<br />
+            या दोघींनी आपलं भांडण असो किंवा आपले आनंदी मोमेंट असो सर्वच यांनी पाहिले आणि सर्वात जास्त यांचे उपकार माझ्यावर अशे आहेत की यांनी तुला सुखरूप तुझ्या घरी पोहचवले आहे ♥️</p>
+            
+            <p>आणि मम्मा खरंच मी खूप नशीबवान आहे की तुझ्या सारखी मैत्रीण मला भेटली... मैत्रीण म्हणू गर्लफ्रेंड म्हणू की अजून काय म्हणू समजत नाही पण नात्याला नावापेक्षा आपण जे नातं टिकवलंय त्याला खूप महत्त्व आहे ♥️</p>
+            
+            <p>माझं नशीब इतकंच चांगलं बोलेल मी बाकी मी unlucky च समजतो स्वतःला कारण तू माझ्या लाइफ मधे कायमची नाहीस 🥺</p>
+            
+            <p>चल जाऊदे सर्व... आज तुझा birthday आहे 🤭 चांगल्या गोष्टी बोलतो.</p>
+            
+            <div class="letter-love-quote">
+              <p>मम्मा माझं खूप प्रेम आहे तुझ्यावर, खूप म्हणजे खूप ♥️💋<br />
+              मी निस्वार्थ प्रेम केलं तुझ्यावर आणि ते तू सांभाळलही तसंच!</p>
+            </div>
+            
+            <p>तुझ्या सर्वच गोष्टी मला भाळतात मम्मा, छोट्यातली छोटी गोष्ट तुझी मला आवडते.<br />
+            तुझं बोलणं, तुझं बघणं, तुझं हसणं... ♥️<br />
+            तुझ्या हसण्यावर तर मी full to fatyak आहे 🤭<br />
+            ते सर्व जाऊदे, माझं तुझ्या आवाजावर पण प्रेम आहे, अजून काय सांगू तुला बोल 🤭</p>
+            
+            <p>मम्मा आपलं लग्न होईल का नाही माहिती नाही पण जोपर्यंत सोबत आहोत तोपर्यंत असाच bond राहूदे आपला.<br />
+            मला माझ्या चुका दाखवून दे नेहमी सारखं, मी काही वाईट वागलो तर मला समजाव लहान बाळा सारखं 🤭</p>
+            
+            <p>आणि मी पण तुला खूप त्रास दिला... खूप, प्रमाण नाही त्याला खूप त्रास दिला, एवढा सहन करून तू मला फक्त प्रेम दिलास मम्मा...<br />
+            <strong class="letter-thankyou">THANK YOU SO MUCH MUMMAAA 💋💋</strong></p>
+            
+            <p>खूप बोलायचं आहे मम्मा पण जाऊदे नाहीतर कंटाळशील 😂😂<br />
+            पण शेवटी हेच बोलेल माझं प्रेम तुझ्यावर खूप आहे, आणि ते तसंच राहणार ♥️</p>
+            
+            <p>आणि हो तू आजारातून मुक्त झालीस, हसायला खेळायला लागलीस ना मला खूप भारी वाटतं! अशीच राहा, खुश राहा. मी असो नसो तू खुश राहा कायम, तुझ्या खुशीसाठी मी खूप काही काही केलं आहे फक्त तू खुश राहा ♥️💋</p>
+            
+            <div class="nazar-box">
+              <div class="nazar-icon">🧿</div>
+              <p class="nazar-header">कोणाची कोणाची कोणाचीच नजर नको लागो माझ्या मम्माला 💋🧿</p>
+              <p class="nazar-text">
+                उभी राहा एका जागेवर...<br />
+                राहिलीस? नक्की राहिलीस? 😁<br />
+                ok...<br />
+                आल्या गेल्याची, शेजारी पजाऱ्याची 😁<br />
+                कुत्र्या, मांजराची 😁<br />
+                भूता खेपाची 😅<br />
+                झाडा झुडपाची 😅<br />
+                याची त्याची...<br />
+                कोणाचीच नजर या माझ्या <strong class="gonddu-name">gondduuddii</strong> ला न लागो 😁🧿<br />
+                खुश? 🤭🤭
+              </p>
+            </div>
+            
+            <p>अशीच खुश राहा, मला माहितीये वाचून हसत असशील किंवा नशील पण काय भरोसा नाही 😂😂<br />
+            पण असो, आहेस तर माझीच ना!</p>
+            
+            <p>चल जास्त होईल आता हे, कंटाळशील तू पण 😅😅</p>
+            
+            <div class="letter-closing">
+              <h3>ONCE AGAIN HAPPY BIRTHDAY MY MUMMMAAAAA ♥️</h3>
+              <h4>I LOVE YOU SO SO SO MUCH 💋</h4>
+              <p class="closing-note">सर्व मराठी मधे आहे कारण माझं इंग्रजी वीक आहे 😂<br />पण भावना खऱ्या आहेत 🤭🤭</p>
+              <p class="closing-bye">टाटा 🖐🏻💋 मम्मा भेट उद्या 💋💋</p>
+            </div>
+          </div>
+        </div>
+        <button id="sealSendBtn" onclick="sealAndSendKisses()">Seal &amp; Send Your Birthday Kisses 💌</button>
+      </div>
+    </div>
+    <div class="final-emojis" id="finalEmojisContainer"></div>
+  </section>
+
+  <!-- Container for emoji bursts and floating particles -->
+  <div id="emojiBurstContainer"></div>
+
+  <!-- Audio Element for Song Playback -->
+  <audio id="bgAudioPlayer" loop></audio>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
